@@ -1,0 +1,14 @@
+# Calculate mean directional accuracy (MDA)
+ 
+def calculate_mean_directional_accuracy(actual, forecast):
+    # Count the number of correct directional forecasts
+    correct_direction = np.sum(np.sign(actual.diff().dropna()) == np.sign(forecast.diff().dropna()))
+    # Total number of directional forecasts
+    total_directional_forecasts = len(actual) - 1
+    # Mean directional accuracy (MDA)
+    mda = correct_direction / total_directional_forecasts
+    return mda
+ 
+# Example usage
+mda = calculate_mean_directional_accuracy(cmp['sum_amt'], cmp['predicted_mean'])
+print("Mean Directional Accuracy (MDA):", mda)
